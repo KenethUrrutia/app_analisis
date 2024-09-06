@@ -1,0 +1,22 @@
+<table>
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Firstname</th>
+			<th>Lastname</th>
+			<th>Email</th>
+			<th>Avatar</th>
+		</tr>
+	</thead>
+	<tbody>
+		@for (user of this.users; track $index) {
+		<tr>
+			<td>{{ user.id }}</td>
+			<td>{{ user.first_name }}</td>
+			<td>{{ user.last_name }}</td>
+			<td>{{ user.email }}</td>
+			<td><img src="{{ user.avatar }}" alt="{{ user.first_name }}" /></td>
+		</tr>
+		}
+	</tbody>
+</table>
