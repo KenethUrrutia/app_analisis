@@ -1,6 +1,7 @@
 <app-sumary (dato)="recibirNumero($event)"></app-sumary>
+<app-data [dato]="dato"></app-data>
 
-<app-data></app-data>
-<p>
-	{{ dato }}
-</p>
+<p>-------------------------HOME-------------------------------</p>
+<h3>Dato Input {{ dato }}</h3>
+<h3>Dato Observable: {{ datoObservable }}</h3>
+<p>-------------------------HOME-------------------------------</p>
