@@ -1,3 +1,4 @@
+import { MessageService } from './../../shared/services/message.service';
 import { Component } from '@angular/core';
 import { DataComponent } from '../../components/data/data.component';
 import { SumaryComponent } from '../../components/sumary/sumary.component';
@@ -10,14 +11,15 @@ import { SumaryComponent } from '../../components/sumary/sumary.component';
 	styleUrl: './home.component.scss'
 })
 export default class HomeComponent {
-	dato: number | undefined;
+	dato: number = 0;
+	datoObservable: number = 0;
 
-	constructor() {
-		console.log('En el constructor');
-	}
+	constructor(private messageService: MessageService) {}
 
 	ngOnInit(): void {
-		console.log('En el OnInit');
+		this.messageService.increment$.subscribe((resp) => {
+			this.datoObservable = resp;
+		});
 	}
 
 	recibirNumero(item: number) {

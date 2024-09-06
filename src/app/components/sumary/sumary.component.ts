@@ -1,3 +1,4 @@
+import { MessageService } from './../../shared/services/message.service';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { DataInterface } from '../../shared/interfaces';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,9 +17,7 @@ export class SumaryComponent {
 	increment: number = 0;
 
 	@Output() dato = new EventEmitter<number>();
-	constructor() {
-		console.log('En el constructor');
-	}
+	constructor(private messageService: MessageService) {}
 
 	ngOnInit(): void {
 		console.log('En el OnInit');
@@ -27,6 +26,7 @@ export class SumaryComponent {
 	incrementNumber() {
 		this.increment++;
 		this.sendNumber();
+		this.messageService.increment$.next(this.increment);
 	}
 
 	sendNumber() {
