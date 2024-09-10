@@ -1,31 +1,57 @@
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { UserInterface } from '../../shared/interfaces';
 import { UserService } from './../../shared/services/user.service';
-import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
 @Component({
 	selector: 'app-users',
 	standalone: true,
-	imports: [MatCardModule, MatButtonModule, MatProgressBarModule, MatTableModule],
+	imports: [
+		MatCardModule,
+		MatButtonModule,
+		MatProgressBarModule,
+		MatTableModule,
+		MatFormFieldModule,
+		MatSortModule,
+		MatPaginatorModule,
+		MatInputModule
+	],
 	templateUrl: './users.component.html',
 	styleUrl: './users.component.scss'
 })
-export default class UsersComponent {
+export default class UsersComponent implements AfterViewInit {
 	displayedColumns: string[] = ['id', 'first_name', 'last_name', 'email', 'avatar'];
-	dataSource: UserInterface[] = [];
+	dataSource!: MatTableDataSource<UserInterface>;
 
+	@ViewChild(MatPaginator) paginator!: MatPaginator;
+	@ViewChild(MatSort) sort!: MatSort;
 	constructor(private userService: UserService) {}
 
-	ngOnInit() {
+	ngAfterViewInit() {
 		this.getUsers();
+	}
+
+	applyFilter(event: Event) {
+		const filterValue = (event.target as HTMLInputElement).value;
+		this.dataSource.filter = filterValue.trim().toLowerCase();
+
+		if (this.dataSource.paginator) {
+			this.dataSource.paginator.firstPage();
+		}
 	}
 
 	getUsers() {
 		this.userService.getUsers().subscribe((resp) => {
-			this.dataSource = resp.data;
+			this.dataSource = new MatTableDataSource(resp.data);
+			this.dataSource.paginator = this.paginator;
+			this.dataSource.sort = this.sort;
 		});
 	}
 }
