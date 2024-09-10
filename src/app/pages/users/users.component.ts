@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -26,7 +26,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 	templateUrl: './users.component.html',
 	styleUrl: './users.component.scss'
 })
-export default class UsersComponent implements AfterViewInit {
+export default class UsersComponent {
 	displayedColumns: string[] = ['id', 'first_name', 'last_name', 'email', 'avatar'];
 	dataSource!: MatTableDataSource<UserInterface>;
 
@@ -34,7 +34,7 @@ export default class UsersComponent implements AfterViewInit {
 	@ViewChild(MatSort) sort!: MatSort;
 	constructor(private userService: UserService) {}
 
-	ngAfterViewInit() {
+	ngOnInit() {
 		this.getUsers();
 	}
 
