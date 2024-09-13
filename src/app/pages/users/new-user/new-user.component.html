@@ -1,0 +1,20 @@
+<div class="container">
+	<form [formGroup]="formSubmit">
+		@if (this.formSubmit.get('name')?.hasError('required')) {
+		<mat-error>Nombre es requerido</mat-error>
+		}
+		<mat-form-field class="example-full-width">
+			<mat-label>Nombre</mat-label>
+			<input matInput placeholder="Ej. Eruyn" formControlName="name" />
+		</mat-form-field>
+		@if (this.formSubmit.get('job')?.hasError('required')) {
+		<mat-error>Nombre es requerido</mat-error>
+		}
+		<mat-form-field class="example-full-width">
+			<mat-label>Trabajo</mat-label>
+			<input matInput placeholder="El. Ingeniero en Telecomunicaciones" formControlName="job" />
+		</mat-form-field>
+
+		<button mat-stroked-button (click)="onSubmit()">Enviar</button>
+	</form>
+</div>

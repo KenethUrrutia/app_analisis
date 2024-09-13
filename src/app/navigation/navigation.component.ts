@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { OptionInterface } from '../shared/interfaces';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
 	selector: 'app-navigation',
@@ -25,7 +26,9 @@ import { OptionInterface } from '../shared/interfaces';
 		AsyncPipe,
 		RouterOutlet,
 		RouterLink,
-		CommonModule
+		CommonModule,
+		MatIconModule,
+		MatTooltipModule
 	]
 })
 export class NavigationComponent {
@@ -43,7 +46,7 @@ export class NavigationComponent {
 			idoption: 2,
 			name: 'Usuarios',
 			icon: 'person',
-			rute: 'user'
+			rute: 'users'
 		});
 	}
 

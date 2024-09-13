@@ -1,4 +1,4 @@
-import { Component, Injectable, ViewChild } from '@angular/core';
+import { Component, Injectable, signal, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -9,6 +9,8 @@ import { UserService } from './../../shared/services/user.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { NewUserComponent } from './new-user/new-user.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Injectable()
 export class MyMatPaginatorIntl extends MatPaginatorIntl {
@@ -26,7 +28,9 @@ export class MyMatPaginatorIntl extends MatPaginatorIntl {
 		MatFormFieldModule,
 		MatSortModule,
 		MatPaginatorModule,
-		MatInputModule
+		MatInputModule,
+		NewUserComponent,
+		MatIconModule
 	],
 	templateUrl: './users.component.html',
 	styleUrl: './users.component.scss',
@@ -43,6 +47,8 @@ export default class UsersComponent {
 
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 	@ViewChild(MatSort) sort!: MatSort;
+	public newRecord = signal(false);
+
 	constructor(private userService: UserService) {}
 
 	ngOnInit() {
@@ -64,5 +70,9 @@ export default class UsersComponent {
 			this.dataSource.paginator = this.paginator;
 			this.dataSource.sort = this.sort;
 		});
+	}
+
+	onNewRecord() {
+		this.newRecord.set(!this.newRecord());
 	}
 }
