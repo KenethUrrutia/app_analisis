@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { Component, Injectable, ViewChild } from '@angular/core';
+import { MatPaginator, MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
@@ -9,6 +9,11 @@ import { UserService } from './../../shared/services/user.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+
+@Injectable()
+export class MyMatPaginatorIntl extends MatPaginatorIntl {
+	override itemsPerPageLabel: string = 'Usuarios por página';
+}
 
 @Component({
 	selector: 'app-users',
@@ -24,7 +29,13 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 		MatInputModule
 	],
 	templateUrl: './users.component.html',
-	styleUrl: './users.component.scss'
+	styleUrl: './users.component.scss',
+	providers: [
+		{
+			provide: MatPaginatorIntl,
+			useClass: MyMatPaginatorIntl
+		}
+	]
 })
 export default class UsersComponent {
 	displayedColumns: string[] = ['id', 'first_name', 'last_name', 'email', 'avatar'];
