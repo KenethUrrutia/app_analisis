@@ -28,6 +28,7 @@
 			</mat-form-field>
 
 			<div class="mat-elevation-z8">
+				<mat-progress-bar mode="indeterminate"></mat-progress-bar>
 				<table mat-table [dataSource]="dataSource" matSort>
 					<!--- Note that these columns can be defined in any order.
 				The actual rendered columns are set as a property on the row definition" -->
@@ -73,13 +74,12 @@
 					</tr>
 				</table>
 			</div>
-			<mat-paginator [pageSize]="3" aria-label="Selecciones la pagina de usuarios"></mat-paginator>
+			<mat-paginator [pageSize]="3"></mat-paginator>
 			}
 		</mat-card-content>
 		<!-- <mat-card-actions>
 			<button mat-button>LIKE</button>
 			<button mat-button>SHARE</button>
 		</mat-card-actions> -->
-		<mat-progress-bar mode="indeterminate"></mat-progress-bar>
 	</mat-card>
 </div>

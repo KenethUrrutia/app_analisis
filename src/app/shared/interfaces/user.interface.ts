@@ -19,3 +19,15 @@ export interface SupportInterface {
 	url: string;
 	text: string;
 }
+
+export interface UserPostInterface {
+	name: string;
+	job: string;
+}
+
+export interface UserPostResponseInterface {
+	name: string;
+	job: string;
+	id: string;
+	createdAt: string;
+}
