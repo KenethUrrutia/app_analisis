@@ -1,0 +1,32 @@
+<div class="container">
+	<form [formGroup]="formSubmit">
+		<table>
+			<tr>
+				<td>
+					<mat-form-field appearance="fill">
+						<mat-label>Correo</mat-label>
+						<input matInput placeholder="example@hotmail.com" formControlName="email" />
+					</mat-form-field>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<mat-form-field appearance="fill">
+						<mat-label>Enter your password</mat-label>
+						<input matInput [type]="hide ? 'password' : 'text'" formControlName="password" />
+						<button
+							mat-icon-button
+							matSuffix
+							(click)="hide = !hide"
+							[attr.aria-label]="'Hide password'"
+							[attr.aria-pressed]="hide"
+						>
+							<mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+						</button>
+					</mat-form-field>
+				</td>
+			</tr>
+		</table>
+		<button mat-raised-button color="primary" (click)="onSubmit()">Iniciar sesión</button>
+	</form>
+</div>

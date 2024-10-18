@@ -48,6 +48,12 @@ export class NavigationComponent {
 			icon: 'person',
 			rute: 'users'
 		});
+		this.menuOption.push({
+			idoption: 3,
+			name: 'Login',
+			icon: 'login',
+			rute: 'login'
+		});
 	}
 
 	isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
